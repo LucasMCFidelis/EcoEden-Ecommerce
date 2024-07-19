@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        banner: 'url(/public/images/sale.png)',
-        offer: 'url(/public/images/offer.png)',
+        banner: 'url(/images/sale.png)',
+        offer: 'url(/images/offer.png)',
       },
     },
   },

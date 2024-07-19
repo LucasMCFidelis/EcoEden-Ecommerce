@@ -1,9 +1,10 @@
 import { Facebook, Instagram, Search, ShoppingCartIcon, User } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function App() {
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false)
-
+  const [isHeaderFixed, setIsHeaderFixed] = useState(false);
+  
   function openSearchInput() {
     setIsSearchInputOpen(true)
   }
@@ -11,11 +12,27 @@ export function App() {
     setIsSearchInputOpen(false)
   }
 
+  useEffect(() => {
+    function handleScroll() {
+      const offset = window.pageYOffset;
+      if (offset > 144) { // ajustando conforme a altura do banner
+        setIsHeaderFixed(true);
+      } else {
+        setIsHeaderFixed(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="h-auto min-h-screen flex flex-col">
-      <header className="h-16 flex justify-between items-center gap-6 p-6">
+    <div className="h-auto min-h-screen max-w-full flex flex-col">
+       <header className={`h-16 flex justify-between items-center gap-6 p-6 bg-zinc-100 ${isHeaderFixed ? 'fixed top-0 w-full shadow-md' : ''}`}>
         <div className="flex gap-2 items-center text-lime-600">
-          <img src="../public/logo.svg" alt="EcoEden" className="size-5"/>
+          <img src="/logo.svg" alt="EcoEden" className="size-5"/>
           <h2 className="hidden sm:block text-base md:text-lg lg:text-xl]">EcoEden</h2>
         </div>
 
@@ -28,29 +45,77 @@ export function App() {
               </button>
             </form>
           ) : (
-            <button onClick={openSearchInput} className="">
+            <button onClick={openSearchInput} className="text-lime-500 text-lg font-semibold">
               <Search className="size-6"></Search>
             </button>
           )}
-          <button className="">
+          <button className="text-lime-500 text-lg font-semibold">
             <User className="size-6"></User>
           </button>
-          <button className="">
+          <button className="text-lime-500 text-lg font-semibold">
             <ShoppingCartIcon className="size-6"></ShoppingCartIcon>
           </button>
         </div>
       </header>
 
       <div id="container" className="flex-1">
-          {/* <div className="bg-banner  h-32 bg-cover sm:bg-contain bg-center "></div> */}
-          <div className="bg-banner h-36 bg-contain bg-center relative">
+          <div className="bg-banner h-36 bg-contain bg-center relative ">
             <div className="bg-offer h-28 bg-contain bg-no-repeat bg-center absolute inset-0 top-4"></div>
           </div>
-          {/* <div className="h-screen"></div> */}
+          <div className="w-full grid grid-rows- grid-cols-2 md:grid-cols-3 gap-6 p-10 place-items-center text-lg">
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3 className="">Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3>Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3>Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3>Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3>Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3>Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3>Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+            <div className=" w-fit flex flex-col items-start justify-center gap-3">
+              <img src="/images/product- (1).png" alt="" className="w-72 "/>
+              <h3>Lorem ipsum dolor sit <br />
+              R$ <span className="text-lime-500 font-semibold">50,00</span>
+              </h3>
+            </div>
+          </div>
       </div>
 
       <footer className="flex flex-col space-x-3 md:px-10">
-        <div className="flex flex-col md:flex-row md:justify-between wrap items-start md:items-center px-5 md:px-0 gap-2">
+        <div className="flex flex-col sm:flex-row sm:justify-between wrap items-start md:items-center px-5 md:px-0 gap-2">
           <div className="flex flex-col gap-1 text-sm">
             <a href="#">Contato</a>
             <a href="#">Termos de serviço</a>
