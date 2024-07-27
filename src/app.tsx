@@ -1,8 +1,21 @@
 import { Facebook, Instagram, Search, ShoppingCartIcon, User } from "lucide-react";
 import { useState } from "react";
+import { Product } from "./components/product";
 
+interface Product{
+  id: string,
+  title: string,
+  price: number,
+  pathImage: string
+}
 export function App() {
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false)
+  const [products, setProducts] = useState([{
+    id: "09hhfi",
+    title: "Perfume",
+    price: 50.00,
+    pathImage: "/images/product- (1).png"
+  }])
 
   function openSearchInput() {
     setIsSearchInputOpen(true)
@@ -53,54 +66,19 @@ export function App() {
         </div>
 
         <div className="w-full grid grid-rows- grid-cols-2 md:grid-cols-3 gap-6 p-10 place-items-center text-xs sm:text-xl">
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3 className="">Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3>Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3>Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3>Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3>Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3>Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3>Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
-          <div className=" w-fit flex flex-col items-start justify-center gap-3">
-            <img src="/images/product- (1).png" alt="" className="w-72 " />
-            <h3>Lorem ipsum dolor sit <br />
-              R$ <span className="text-lime-500 font-semibold">50,00</span>
-            </h3>
-          </div>
+
+          {products.map(product => (
+            <Product.Root key={product.id}>
+              <Product.Image
+                path={product.pathImage}
+                alt="Perfume"
+              />
+              <Product.Content
+                title={product.title}
+                price={product.price}
+              />
+            </Product.Root>
+          ))}
         </div>
       </div>
 
